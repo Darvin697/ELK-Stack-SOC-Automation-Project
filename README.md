@@ -83,6 +83,7 @@ Configured osTicket to receive alerts from Elastic via webhook. Conducted full a
 ├── diagrams/         # Architecture and logical diagrams
 ├── documentation/    # Step-by-step setup notes and phase writeups
 ├── scripts/          # Automation and configuration scripts
+├── screenshots/      # Screenshots for Projects
 └── README.md
 ```
 
