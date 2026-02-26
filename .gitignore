@@ -1,0 +1,17 @@
+# --- Obsidian Specifics ---
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/graph.json
+.obsidian/appearance.json
+
+# --- OS Specifics (Clean up Ubuntu/Mac/Windows clutter) ---
+.DS_Store
+Thumbs.db
+.trash/
+
+# --- Security/SOC Lab Specifics (CRITICAL) ---
+*.env
+*.key
+*.pem
+/credentials/
+vultr_api_key.txt
