@@ -184,5 +184,17 @@
     }
   },
   "active": "d67af10f950a0d06",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "screenshots/vltur-instances-2.png",
+    "screenshots/Ufw-firewall.png",
+    "screenshots/Ticket_open.png",
+    "screenshots/SSH_brut-log.png",
+    "screenshots/SSH-brut_ip.png",
+    "screenshots/Server-Vultr.png",
+    "screenshots/RDP-Bruteforced.png",
+    "screenshots/Osticket_install-user.png",
+    "screenshots/Os-ticket_install.png",
+    "screenshots/Os_Ticket.png",
+    "screenshots/Mithic_Dashbord.png"
+  ]
 }
