@@ -1,85 +1,104 @@
-# ELK-Stack-SOC-Automation-Project
+# 🔐 ELK Stack SOC Automation Project
 
-This project demonstrates the end-to-end setup and management of a Security Operations Center (SOC) environment deployed on Vultr Cloud.
-integrating  SIEM capabilities with Endpoint Detection and Response (EDR) and an automated ticketing system (OS Ticket).
-It features real-world attack simulations to validate detection rules and incident response workflows.(SSH,RDP Bruteforce)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Stack](https://img.shields.io/badge/SIEM-Elastic%20Stack-005571?logo=elastic)
+![Cloud](https://img.shields.io/badge/Cloud-Vultr-007BFC)
+![Status](https://img.shields.io/badge/status-Complete-brightgreen)
 
+A full end-to-end **Security Operations Center (SOC)** home lab deployed on **Vultr Cloud**, integrating SIEM capabilities with Endpoint Detection & Response (EDR) and an automated ticketing pipeline to detect and respond to real-world attack simulations.
 
-ELK Stack SOC Automation Project
+---
 
-🛡️ Project Overview
-This project demonstrates the end-to-end setup and management of a Security Operations Center (SOC) environment. I built a functional home lab that integrates SIEM capabilities with endpoint monitoring and an automated ticketing system to detect and respond to real-world attack simulations.
+## 🎯 Objectives
 
-🎯 Key Objectives
-Deploy a full ELK Stack (Elasticsearch, Kibana, Fleet Server).
+- Deploy a full **ELK Stack** (Elasticsearch, Logstash, Kibana, Fleet Server)
+- Configure endpoint telemetry using **Elastic Agent** and **Sysmon** on Windows and Ubuntu
+- Engineer custom **detection rules** for Brute Force (SSH/RDP) and Command & Control (C2) traffic
+- Integrate **osTicket** to automate the Alert → Incident Ticket lifecycle
+- Simulate adversary techniques and validate the full SOC analyst workflow
 
-Configure endpoint telemetry using Elastic Agent and Sysmon on Windows and Ubuntu.
+---
 
-Engineer custom detection rules for Brute Force (SSH/RDP) and Command & Control (C2) traffic.
+## 🏗️ Architecture
 
-Integrate osTicket to automate the transition from "Alert" to "Incident Ticket."
+[![Logical Diagram](digrams/Logical-Digram.png)](digrams/Logical-Digram.png)
 
-🏗️ Architecture
+| Component | Details |
+|---|---|
+| **SIEM Server** | Ubuntu 24.04 — Elastic Stack (Elasticsearch + Kibana) |
+| **Fleet Server** | Ubuntu 24.04 — Centralized Elastic Agent management |
+| **Windows Target** | Windows Server 2022 — Sysmon + Elastic Agent |
+| **Linux Target** | Ubuntu Server — Elastic Agent |
+| **Attack Platform** | Ubuntu 24.04 — Mythic C2 Framework |
+| **Case Management** | Ubuntu 24.04 — osTicket (API/Webhook integration) |
 
+---
 
+## 🚀 Implementation Phases
 
-The environment consists of:
+### Phase 1 — Infrastructure & SIEM Setup (Days 1–7)
+Provisioned cloud VMs on Vultr for the SIEM and all endpoints. Configured Elasticsearch for data storage, Kibana for visualization, and established a Fleet Server for centralized agent management.
 
-SIEM Server: Ubuntu 24.04 running the Elastic Stack.
+### Phase 2 — Telemetry & Log Ingestion (Days 8–13)
+Deployed Sysmon on Windows targets for granular event logging (process creation, network connections). Installed Elastic Agents on all endpoints and normalized incoming data using the Elastic Common Schema (ECS).
 
-Endpoints: Windows Server 2022 (Target) & Ubuntu Server (Target).
+### Phase 3 — Detection Engineering & Alerting (Days 14–22)
+Built custom KQL (Kibana Query Language) detection rules for:
+- Successful and failed **RDP Brute Force** attempts
+- **SSH authentication failures**
+- **Mythic C2** agent check-ins and beaconing
 
-Attack Platform: Mythic C2 Framework.
+Created a unified SOC Dashboard to visualize global login attempts and system health in real time.
 
-Case Management: osTicket integrated via API/Webhooks.
+### Phase 4 — Incident Response & Ticketing (Days 23–30)
+Configured osTicket to receive alerts from Elastic via webhook. Conducted full adversary simulations (SSH/RDP Brute Force, C2 deployment) and documented the complete **Alert → Ticket → Resolution** lifecycle, simulating a professional SOC analyst workflow.
 
-🚀 Implementation Phases
-Phase 1: Infrastructure & SIEM Setup (Days 1–7)
-Provisioned virtualized environments for SIEM and Endpoints.
+---
 
-Configured Elasticsearch for data storage and Kibana for visualization.
+## 📊 Attack Simulations & Detections
 
-Established a Fleet Server for centralized agent management.
+| Attack Type | Detection Method | Response Action |
+|---|---|---|
+| RDP Brute Force | Threshold alert (>10 failed logins/min) | Source IP identified, osTicket #102 created |
+| SSH Brute Force | Failed auth spike detection | Alert triggered, IP correlated across logs |
+| C2 Communication | Mythic agent heartbeat pattern detection | Process terminated, full log analysis conducted |
 
-Phase 2: Telemetry & Ingestion (Days 8–13)
-Deployed Sysmon on Windows for granular event logging (Process creation, Network connections).
+---
 
-Installed Elastic Agents on Linux and Windows to ship logs to the SIEM.
+## 🛠️ Tools & Technologies
 
-Normalized data using Elastic Common Schema (ECS).
+| Category | Tool |
+|---|---|
+| SIEM | Elastic Stack (Elasticsearch, Kibana, Fleet) |
+| EDR & Logging | Elastic Agent, Sysmon |
+| Ticketing / Case Mgmt | osTicket |
+| Adversary Simulation | Mythic C2 Framework |
+| Cloud / VMs | Vultr |
+| OS Targets | Windows Server 2022, Ubuntu 24.04 |
 
-Phase 3: Detection Engineering & Alerting (Days 14–22)
-Built custom KQL (Kibana Query Language) alerts for:
+---
 
-Successful/Failed RDP Brute Force.
+## 📁 Repository Structure
+```
+├── diagrams/         # Architecture and logical diagrams
+├── documentation/    # Step-by-step setup notes and phase writeups
+├── scripts/          # Automation and configuration scripts
+└── README.md
+```
 
-SSH Authentication failures.
+---
 
-Mythic Agent C2 check-ins.
+## 📚 Key Skills Demonstrated
 
-Created a unified SOC Dashboard to visualize global login attempts and system health.
+- SIEM deployment and configuration
+- Detection rule engineering with KQL
+- Endpoint telemetry collection and log normalization
+- Adversary simulation and threat hunting
+- Automated incident response pipeline design
+- Cloud infrastructure provisioning
 
-Phase 4: Incident Response & Ticketing (Days 23–30)
-Configured osTicket to receive alerts from Elastic.
+---
 
-Conducted Adversary Simulations (SSH/RDP Brute Force).
+## 📄 License
 
-Documented the full "Alert-to-Ticket" lifecycle, simulating a professional SOC Analyst workflow.
-
-📊 Investigation Examples
-Attack Type	Detection Method	Mitigation/Response
-RDP Brute Force	Threshold Alert (>10 failed logins)	Identified Source IP, Created osTicket #102
-C2 Communication	Mythic Agent Heartbeat Detection	Log Analysis, Process Termination
-🛠️ Tools Used
-SIEM: Elastic Stack
-
-EDR/Logs: Sysmon, Elastic Agent
-
-Ticketing: osTicket
-
-C2: Mythic
-
-Cloud/VMs: [Insert your platform, e.g., VirtualBox, VMWare, or Azure]
-
-Next Step for your GitHub:
-Would you like me to show you how to write the Investigation Report for Day 26 (SSH Brute Force) to include as a PDF or Markdown file in your repo?
+This project is licensed under the [MIT License](LICENSE).
